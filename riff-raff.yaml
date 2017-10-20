@@ -23,6 +23,7 @@ deployments:
       cloudFormationStackName: cc-aws-microservice-workshop
       templatePath: cfn.yaml
     dependencies: [cc-aws-microservice-workshop-upload]
+    
   cc-aws-microservice-workshop-lambda-update:
     template: cc-aws-microservice-workshop
     actions: [updateLambda]

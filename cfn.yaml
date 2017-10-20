@@ -59,7 +59,7 @@ Resources:
                 - execute-api:Invoke
               Resource: "*"
 
-  Lambda:
+  WorkshopLambda:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub ${App}-${Stage}
@@ -85,6 +85,7 @@ Resources:
     Properties:
       Description: Api to call our lambda
       Name: !Sub ${App}-api-${Stage}
+  
   WorkshopApiResource:
     Type: AWS::ApiGateway::Resource
     Properties:
@@ -93,7 +94,7 @@ Resources:
         PathPart: helloWorld
     DependsOn: WorkshopApi
 
-  WorkshopApitMethod:
+  WorkshopApiMethod:
     Type: AWS::ApiGateway::Method
     Properties:
       AuthorizationType: NONE
@@ -104,12 +105,12 @@ Resources:
         Type: AWS_PROXY
         IntegrationHttpMethod: POST
         Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${WorkshopLambda.Arn}/invocations
-     DependsOn:
+    DependsOn:
      - WorkshopApi
      - WorkshopLambda
      - WorkshopApiResource
 
-  WorkshopApiAPIDeployment:
+  WorkshopApiDeployment:
     Type: AWS::ApiGateway::Deployment
     Properties:
       Description: Deploys the API into an environment/stage
