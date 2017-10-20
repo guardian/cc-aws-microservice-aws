@@ -12,7 +12,7 @@ templates:
       prefixStack: false
 
 deployments:
-  jr-microservice-upload:
+  cc-aws-microservice-workshop-upload:
     template: cc-aws-microservice-workshop
     actions: [uploadLambda]
   cc-aws-microservice-workshop-cfn:
@@ -22,8 +22,8 @@ deployments:
       prependStackToCloudFormationStackName: false
       cloudFormationStackName: cc-aws-microservice-workshop
       templatePath: cfn.yaml
-    dependencies: [jr-microservice-upload]
-  jr-microservice-lambda-update:
+    dependencies: [cc-aws-microservice-workshop-upload]
+  cc-aws-microservice-workshop-lambda-update:
     template: cc-aws-microservice-workshop
     actions: [updateLambda]
     dependencies: [cc-aws-microservice-workshop-cfn]
